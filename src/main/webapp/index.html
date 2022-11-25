@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>可移动智能粮仓</title>
+    <meta name="description" content="Admin Template to use in any Backend Development" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Favicon -->
+    <!-- CSS ============================================ -->
+    <!-- Vendor CSS(Contain Bootstrap,Icon Fonts) -->
+    <link rel="stylesheet" href="assets/css/vendor/vendor.min.css" />
+
+    <!-- Plugin CSS(Global Plugins Files) -->
+    <link rel="stylesheet" href="assets/css/plugins/simplebar.css" />
+    <!-- Plugin CSS(Plugins Files for only this Page) -->
+    <link rel="stylesheet" href="assets/css/plugins/chart/apexcharts.css" />
+    <link rel="stylesheet" href="assets/css/plugins/datatables.min.css" />
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="assets/css/style.min.css" />
+
+
+
+</head>
+
+<body>
+<div class="main-wrapper">
+    <!-- Header Section Start -->
+    <div class="header-section">
+        <div class="container-fluid">
+            <div class="row justify-content-between align-items-center">
+                <!-- Header Logo(Header Left) Start -->
+                <div class="header-logo col-auto d-none d-sm-flex"><a href="index.html"><span>
+                                <p style="font: italic bold 25px Arial ;">可移动智能粮仓</p>
+                            </span></span></a></div>
+                <!-- Header Logo(Header Left) End -->
+                <!-- Header Right Start -->
+                <div class="header-right flex-grow-1 col-auto">
+                    <div class="row justify-content-between align-items-center">
+                        <!-- SideNav Toggle & Search Start -->
+                        <div class="d-flex col-auto">
+                            <!-- SideNav Toggle Start --><button class="sidenav-toggle d-lg-none"><i
+                                data-feather="menu"></i></button>
+                            <!-- SideNav Toggle End -->
+                            <!-- Search Start -->
+                            <div class="header-search"><button class="header-search-toggle d-flex d-md-none"><i
+                                    data-feather="search"></i></button>
+                                <div class="header-search-form">
+                                    <form action="#"><input type="text" placeholder="Search Something..." /><button
+                                            class="search-submit"><i data-feather="search"></i></button></form>
+                                </div>
+                            </div>
+                            <!-- Search End -->
+                        </div>
+                        <!-- SideNav Toggle & Search End -->
+                        <!-- Header Actions(Header Right) Start -->
+                        <div class="col-auto">
+                            <ul class="header-right-action nav">
+                                <!-- Notification Start -->
+                                <div>
+                                    <select name="" id="xz">
+                                        <option value="">--请选择存储食物的类型--</option>
+                                        <option value="1">小麦</option>
+                                        <option value="2">大米</option>
+                                        <option value="3">玉米</option>
+                                        <option value="4">大豆</option>
+                                    </select>
+
+                                </div>
+
+                                <!-- Notification End -->
+
+                                <!-- User Start -->
+                                <li class="nav-item dropdown user"><a class="nav-link" href="#"
+                                                                      data-bs-toggle="dropdown"><span class="name">Hello</span><span
+                                        class="thumbnail"><img src="assets/images/product/order/product-3.jpg"
+                                                               alt="User Thumbnail Image" /></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="register.html"><i
+                                                data-feather="log-out"></i>Sign Out</a>
+                                    </div>
+                                </li>
+                                <!-- User End -->
+                            </ul>
+                        </div>
+                        <!-- Header Actions(Header Right) End -->
+                    </div>
+                </div>
+                <!-- Header Right End -->
+            </div>
+        </div>
+    </div>
+    <!-- Header Section End -->
+    <!-- SideNav Section Start -->
+    <div class="sidenav-section" data-simplebar>
+        <!-- SideNav Inner Start -->
+        <div class="sidenav-inner">
+            <nav class="sidenav-menu" id="sidenav-menu">
+                <ul>
+                    <li class="has-sub-menu"><a href="index.html"><i data-feather="home"
+                                                                     class="nav-icon"></i>首页<span class="arrow"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul class="sub-menu">
+
+                        </ul>
+                    </li>
+
+
+                    </li>
+                    <li class="has-sub-menu"><a href="#"><i data-feather="user" class="nav-icon"></i>个人中心<span
+                            class="arrow"><i class="fa fa-angle-down"></i></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="tuijian.html">推荐</a></li>
+                            <li><a href="#">报告<span></span></a>
+                                <ul class="sub-menu">
+                                    <li><a href="temperature.html">温度每日报告</a></li>
+                                    <li><a href="humidity.html">湿度每日报告</a></li>
+                                    <li><a href="oxygen.html">氧气每日报告</a></li>
+                                    <li><a href="carbon dioxide.html">二氧化碳每日报告</a></li>
+                                    <li><a href="weekly report.html">一周报告</a></li>
+
+                                </ul>
+                            </li>
+
+                        </ul>
+
+
+
+                    <li class="has-sub-menu"><a href="#"><i data-feather="bar-chart-2"
+                                                            class="nav-icon"></i>实时监控<span class="arrow"><i
+                            class="fa fa-angle-down"></i></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="2.html">实时数据</a></li>
+                            <li><a href="granary.html">粮仓含量</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- SideNav Inner End -->
+    </div>
+    <!-- SideNav Section End -->
+    <!-- Content Body Start -->
+    <div class="content-body">
+        <!-- Page Headings Start -->
+        <div class="row justify-content-between align-items-center mb-4">
+            <!-- Page Heading Start -->
+            <div class="col-md-auto col-12 mb-2">
+                <h3 class="mb-0">可移动智能粮仓</h3>
+            </div>
+            <!-- Page Heading End -->
+
+        </div>
+        <!-- Page Headings End -->
+        <!-- Top Report Start -->
+        <div class="row row-cols-xl-4 row-cols-sm-2 row-cols-1">
+            <div class="col mb-6">
+                <div class="top-report-card card">
+                    <div class="card-head">
+                        <h4 class="title">
+                            <a href="temperature.html">
+                                <button style="border: 0;">温度</button>
+                            </a>
+                        </h4>
+                        <span class="h5"> <i class="fa fa-caret-up ml-1 text-success"></i></span>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row align-items-center">
+
+                            <div class="col-7">
+                                <div class="top-report-chart top-report-chart-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-6">
+                <div class="top-report-card card">
+                    <div class="card-head">
+                        <h4 class="title">
+                            <a href="humidity.html">
+                                <button style="border: 0;">湿度</button>
+                            </a>
+
+                        </h4>
+                        <span class="h5"> <i class="fa fa-caret-up ml-1 text-success"></i></span>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row align-items-center">
+
+                            <div class="col-7">
+                                <div class="top-report-chart top-report-chart-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-6">
+                <div class="top-report-card card">
+                    <div class="card-head">
+                        <h4 class="title">
+                            <a href="oxygen.html">
+                                <button style="border: 0;">氧气</button>
+                            </a>
+                        </h4>
+                        <span class="h5"> <i class="fa fa-caret-up ml-1 text-success"></i></span>
+                    </div>
+                    <div class="card-body pt-0"></div>
+                    <div class="card-body pt-0">
+                        <div class="row align-items-center">
+
+                            <div class="col-7">
+                                <div class="top-report-chart top-report-chart-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-6">
+                <div class="top-report-card card">
+                    <div class="card-head">
+                        <h4 class="title">
+                            <a href="carbon dioxide.html">
+                                <button style="border: 0;">二氧化碳</button>
+                            </a>
+                        </h4>
+                        <span class="h5"> <i class="fa fa-caret-up ml-1 text-success"></i></span>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row align-items-center">
+
+                            <div class="col-7">
+                                <div class="top-report-chart top-report-chart-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top Report End -->
+        <!-- Statistics & Progress Graph Start -->
+        <div class="row row-cols-lg-2 row-cols-1">
+            <!-- Statistics Start -->
+            <div class="col mb-6">
+                <div class="card">
+                    <div class="card-head">
+                        <h4 class="title">
+                            <a href="weekly report.html">
+                                <button style="border: 0;">一周报告</button>
+                            </a>
+                        </h4>
+                        <span class="font-italic">weekly report</span>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="weekly-statistics-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Statistics Start -->
+            <!-- Progress Graph Start -->
+
+            <!-- Progress Graph Start -->
+        </div>
+        <!-- Statistics & Progress Graph End -->
+        <!-- Product Orders Start -->
+
+        <!-- Product Orders End -->
+        <!-- Conversion Rate,Report-History & Top selling area Start -->
+        <div class="row row-cols-xl-3 row-cols-lg-2 row-cols-1 mb-n6">
+            <!-- Conversion Rate Start -->
+
+            <!-- Top selling area Start -->
+        </div>
+        <!-- Conversion Rate,Report-History & Top selling area End -->
+    </div>
+    <!-- Content Body End -->
+    <!-- Footer Section Start -->
+    <div class="footer-section bg-white py-4 mt-auto">
+        <div class="container-fluid">
+            <div class="footer-copyright text-center">
+                <p class="text-muted">2022 <a href="index.html">可移动智能粮仓</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section End -->
+</div>
+
+
+</body>
+<script src="assets/js/vendor/vendor.min.js"></script>
+<!--Plugins JS-->
+<script src="assets/js/plugins/simplebar.min.js"></script>
+<!-- Plugins & Activation JS For Only This Page -->
+<!-- Apex Chart Script -->
+<script src="assets/js/plugins/chart/apexcharts/apexcharts.min.js"></script>
+<script src="assets/js/plugins/chart/apexcharts/homeOne.js"></script>
+<!-- VMap Script -->
+<!-- Data Table Script -->
+<script src="assets/js/plugins/datatables.min.js"></script>
+<script>
+    $('.order-list-table').each(function() {
+        var $this = $(this),
+            $dtrAllSelect = $this.find('thead .dtrAllSelect'),
+            $dtrSelect = $this.find('tbody .dtr-select:not(:disabled)');
+        $this.DataTable({
+            responsive: true,
+            dom: "t",
+            ordering: false
+        });
+        $dtrAllSelect.on('click', function() {
+            if (this.checked) {
+                $dtrSelect.prop('checked', this.checked).parent().addClass('selected')
+            } else {
+                $dtrSelect.prop('checked', this.checked).parent().removeClass('selected')
+            }
+        });
+        $dtrSelect.on('change', function() {
+            var $this = $(this);
+            if ($this.is(":checked")) {
+                $this.parent().addClass('selected')
+            } else {
+                $this.parent().removeClass('selected')
+            };
+            var check = ($dtrSelect.filter(":checked").length === $dtrSelect.length);
+            $dtrAllSelect.prop("checked", check)
+        })
+    });
+</script>
+<!--Main JS(Common Activation Codes)-->
+<script src="assets/js/main.js"></script>
+<script>
+var a=[10];
+    $("#xz").on("change", function () {
+        if ($("option:selected", this).val() == 1) {
+            $.ajax({
+                type : "get",
+                url : "Choose/wheat.action",
+                data: {a},
+                async: false,
+                success:function(data){
+                    console.log(10)
+                }
+            })
+        };
+        if ($("option:selected", this).val() == 2) {
+            $.ajax({
+                type : "get",
+                url : "Choose/rice.action",
+                data: {},
+                async: false,
+                success:function(data){
+
+                    console.log(10)
+                }
+
+            })
+        };
+        if ($("option:selected", this).val() == 3) {
+            $.ajax({
+                type : "get",
+                url : "Choose/soybean.action",
+                data: {},
+                async: false,
+                success:function(data){
+
+                    console.log(10)
+                }
+
+            })
+        };
+        if ($("option:selected", this).val() == 4) {
+            $.ajax({
+                type : "get",
+                url : "Choose/maize.action",
+                data: {},
+                async: false,
+                success:function(data){
+                    console.log(10)
+                }
+
+            })
+        };
+    });
+
+</script>
+
+
+
+
+</html>>

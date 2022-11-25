@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+<button id="binTap">获取数据</button>
+<script>
+    var CO2
+    $('#binTap').on('click', function() {
+        $.ajax({
+            url: 'Hardware/into.action',
+            data:{CO2:10.0},
+            async: false,
+            type: 'post',
+            success: function(data) {
+                console.log(CO2)
+
+            }
+        })
+    })
+</script>
+</body>
+</html>

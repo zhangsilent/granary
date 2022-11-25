@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时数据</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 360px;
+            border: 1px solid #ddd;
+        }
+
+        .all {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .box1 {
+            width: 500px;
+            margin-top: 5px;
+            height: 30px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .btn {
+            width: 100px;
+            height: 25px;
+            color: #8c96a0;
+            text-shadow: 1px 1px 1px #fff;
+            border: 1px solid #dce1e6;
+            box-shadow: 0 1px 2px #fff inset, 0 -1px 0 #a8abae inset;
+            background: -webkit-linear-gradient(top, #f2f3f7, #e4e8ec);
+            background: -moz-linear-gradient(top, #f2f3f7, #e4e8ec);
+            background: linear-gradient(top, #f2f3f7, #e4e8ec);
+            font-size: 15px;
+        }
+
+        .btn:hover,
+        .btn:active {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15));
+        }
+    </style>
+    <script src="echarts.min.js"></script>
+    <script src="JQuery.min.js"></script>
+</head>
+
+<body>
+<div class="all">
+    <div class="box" id="T"></div>
+    <div class="box" id="H"></div>
+
+</div>
+<div class="all">
+    <div class="box1"><button class="btn" id="shen">升温</button><button class="btn" id="jiang">降温</button></div>
+    <div class="box1"><button class="btn" id="zeng">增湿</button><button class="btn" id="gan">干燥</button></div>
+
+</div>
+<div class="all">
+    <div class="box" id="O"></div>
+    <div class="box" id="C"></div>
+</div>
+
+
+
+</body>
+<script>
+    function create1() {
+        var myChart = echarts.init(document.getElementById('T'));
+        var t = [];
+        function getusers() {
+            $.ajax({
+                type: "post",
+                async: false,
+                url: "Data/newData.action",
+                data: {},
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        for (var i = 0; i < result.length; i++) {
+
+                            t.push(result[i].T)
+
+
+
+                        }
+                    }
+                }
+            });
+            return t;
+        }
+        // 执行异步请求
+        getusers();
+        //温度
+        var option1;
+        option1 = {
+            title: {
+                text: '温度(°C)'
+            },
+            series: [
+                {
+                    startAngle: 200,
+                    endAngle: -20,
+                    type: 'gauge',
+                    center: ['50%', '60%'],
+                    min: 0,
+                    max: 100,
+                    splitNumber: 10,
+                    itemStyle: {
+                        normal:
+                            {
+                                color: function (params) {
+                                    if (params.data > 5 && params.data < 30) {
+                                        return "#99ff99";
+                                    } else if (params.data >= 30 && params.data <= 5) {
+                                        return "red";
+                                    }
+                                }
+                            }
+                    },
+                    progress: {
+                        show: true,
+                        width: 30
+                    },
+                    pointer: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 30
+                        }
+                    },
+                    axisTick: {
+                        distance: -45,
+                        splitNumber: 5,
+                        lineStyle: {
+                            width: 2,
+                            color: "#999"
+                        }
+                    },
+                    splitLine: {
+                        distance: -52,
+                        length: 14,
+                        lineStyle: {
+                            width: 3,
+                            color: '#999'
+                        }
+                    },
+                    axisLabel: {
+                        distance: -20,
+                        color: '#999',
+                        fontSize: 20
+                    },
+                    detail: {
+                        valueAnimation: true,
+                        width: '60%',
+                        lineHeight: 40,
+                        borderRadius: 8,
+                        offsetCenter: [0, '-15%'],
+                        fontSize: 60,
+                        fontWeight: 'bolder',
+                        color: 'auto'
+                    },
+                    data: t
+                }
+            ]
+        };
+        // 填入数据
+        myChart.setOption(option1)
+    }
+    $(function () {
+        setInterval("create1()", 1000);
+    })
+
+    //按钮点击事件（温度）
+    var a = 1, b = 1;
+    $("#shen").click(function () {
+        a++;
+        $.ajax({
+            type: "get",
+            url: "Control/addT.action",
+            data: { a },
+            async: true,
+
+            success: function (data) {
+
+                console.log(a);
+            }
+
+        });
+
+    });
+    $("#jiang").click(function () {
+        a--;
+        $.ajax({
+            type: "get",
+            url: "Control/subT.action",
+            data: { a },
+            async: true,
+
+            success: function (data) {
+
+                console.log(a);
+            }
+
+        });
+
+    });
+</script>
+<script>
+    function create2() {
+        var myChart = echarts.init(document.getElementById('H'));
+        var h = [];
+        function getusers() {
+            $.ajax({
+                type: "post",
+                async: false,
+                url: "Data/newData.action",
+                data: {},
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        for (var i = 0; i < result.length; i++) {
+
+                            h.push(result[i].humidity)
+
+                        }
+                    }
+                }
+            });
+            return h;
+        }
+        // 执行异步请求
+        getusers();
+        //湿度
+
+        var option2;
+        option2 = {
+            title: {
+                text: '湿度(%)'
+            },
+            series: [
+                {
+                    type: 'gauge',
+                    center: ['50%', '60%'],
+                    startAngle: 200,
+                    endAngle: -20,
+                    min: 0,
+                    max: 100,
+                    splitNumber: 10,
+                    itemStyle: {
+                        normal:
+                            {
+                                color: function (params) {
+                                    if (params.data >= 30 && params.data < 70) {
+                                        return "#99ff99";
+                                    } else if (params.data >= 70 || params.data < 30) {
+
+
+                                        return "red";
+                                    }
+                                }
+                            }
+                    },
+
+                    progress: {
+                        show: true,
+                        width: 30
+                    },
+                    pointer: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 30
+                        }
+                    },
+                    axisTick: {
+                        distance: -45,
+                        splitNumber: 5,
+                        lineStyle: {
+                            width: 2,
+                            color: '#999'
+                        }
+                    },
+                    splitLine: {
+                        distance: -52,
+                        length: 14,
+                        lineStyle: {
+                            width: 3,
+                            color: '#999'
+                        }
+                    },
+                    axisLabel: {
+                        distance: -20,
+                        color: '#999',
+                        fontSize: 20
+                    },
+                    anchor: {
+                        show: false
+                    },
+                    title: {
+                        show: false
+                    },
+                    detail: {
+                        valueAnimation: true,
+                        width: '60%',
+                        lineHeight: 40,
+                        borderRadius: 8,
+                        offsetCenter: [0, '-15%'],
+                        fontSize: 60,
+                        fontWeight: 'bolder',
+                        color: 'auto'
+                    },
+                    data: h
+                }
+            ]
+        };
+        // 填入数据
+        myChart.setOption(option2)
+    }
+    $(function () {
+        setInterval("create2()", 1000);
+    })
+
+    //湿度
+    $("#zeng").click(function () {
+        b++;
+        $.ajax({
+            type: "get",
+            url: "Control/addH.action",
+            data: { b },
+            async: true,
+
+            success: function (data) {
+
+                console.log(b);
+
+            }
+
+        });
+
+    });
+    $("#gan").click(function () {
+        b--;
+        $.ajax({
+            type: "get",
+            url: "Control/subH.action",
+            data: { b },
+            async: true,
+
+            success: function (data) {
+
+                console.log(b);
+
+            }
+
+        });
+
+    })
+</script>
+<script>
+    function create3() {
+        var myChart = echarts.init(document.getElementById('O'));
+        var o = [];
+        function getusers() {
+            $.ajax({
+                type: "post",
+                async: false,
+                url: "Data/newData.action",
+                data: {},
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        for (var i = 0; i < result.length; i++) {
+
+                            o.push(result[i].O2)
+
+
+
+                        }
+                    }
+                }
+            });
+            return o;
+        }
+        // 执行异步请求
+        getusers();
+        //氧气
+        var option3;
+        option3 = {
+            title: {
+                text: '氧气(%)'
+            },
+            series: [
+                {
+                    type: 'gauge',
+                    center: ['50%', '60%'],
+                    startAngle: 200,
+                    endAngle: -20,
+                    min: 0,
+                    max: 100,
+                    splitNumber: 10,
+                    itemStyle: {
+                        color: "#99ff99"
+                    },
+                    progress: {
+                        show: true,
+                        width: 30
+                    },
+                    pointer: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 30
+                        }
+                    },
+                    axisTick: {
+                        distance: -45,
+                        splitNumber: 5,
+                        lineStyle: {
+                            width: 2,
+                            color: '#999'
+                        }
+                    },
+                    splitLine: {
+                        distance: -52,
+                        length: 14,
+                        lineStyle: {
+                            width: 3,
+                            color: '#999'
+                        }
+                    },
+                    axisLabel: {
+                        distance: -20,
+                        color: '#999',
+                        fontSize: 20
+                    },
+                    anchor: {
+                        show: false
+                    },
+
+                    detail: {
+                        valueAnimation: true,
+                        width: '60%',
+                        lineHeight: 40,
+                        borderRadius: 8,
+                        offsetCenter: [0, '-15%'],
+                        fontSize: 60,
+                        fontWeight: 'bolder',
+                        color: 'auto'
+                    },
+                    data: o
+                }
+            ]
+        };
+        // 填入数据
+        myChart.setOption(option3)
+    }
+    $(function () {
+        setInterval("create3()", 1000);
+    })
+</script>
+<script>
+    function create4() {
+        var myChart = echarts.init(document.getElementById('C'));
+        var c = [];
+        function getusers() {
+            $.ajax({
+                type: "post",
+                async: false,
+                url: "Data/newData.action",
+                data: {},
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        for (var i = 0; i < result.length; i++) {
+
+                            c.push(result[i].CO2)
+
+
+
+                        }
+                    }
+                }
+            });
+            return c;
+        }
+        // 执行异步请求
+        getusers();
+        //二氧化碳
+
+        var option4;
+        option4 = {
+            title: {
+                text: '二氧化碳(%)'
+            },
+            series: [
+                {
+                    type: 'gauge',
+                    center: ['50%', '60%'],
+                    startAngle: 200,
+                    endAngle: -20,
+                    min: 0,
+                    max: 1,
+                    splitNumber: 10,
+                    itemStyle: {
+                        normal:
+                            {
+                                color: function (params) {
+                                    if (params.data > 0.03 && params.data < 0.1) {
+                                        return "#99ff99";
+                                    } else if (params.data <= 0.03 || params.data >= 0.1) {
+
+                                        return "red";
+                                    }
+                                }
+                            }
+                    },
+
+                    progress: {
+                        show: true,
+                        width: 30
+                    },
+                    pointer: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 30
+                        }
+                    },
+                    axisTick: {
+                        distance: -45,
+                        splitNumber: 5,
+                        lineStyle: {
+                            width: 2,
+                            color: '#999'
+                        }
+                    },
+                    splitLine: {
+                        distance: -52,
+                        length: 10,
+                        lineStyle: {
+                            width: 3,
+                            color: '#999'
+                        }
+                    },
+                    axisLabel: {
+                        distance: -20,
+                        color: '#999',
+                        fontSize: 20
+                    },
+                    anchor: {
+                        show: false
+                    },
+
+                    detail: {
+                        valueAnimation: true,
+                        width: '60%',
+                        lineHeight: 40,
+                        borderRadius: 8,
+                        offsetCenter: [0, '-15%'],
+                        fontSize: 60,
+                        color: 'auto',
+                        fontWeight: 'bolder',
+
+                    },
+                    data: c
+                }
+            ]
+        };
+        myChart.setOption(option4);
+    }
+    $(function () {
+        setInterval("create4()", 1000);
+    })
+
+</script>
+
+</html>

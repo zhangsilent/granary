@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 750px;
+            height: 500px;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <script src="echarts.min.js"></script>
+    <script src="JQuery.min.js"></script>
+
+
+</head>
+
+<body>
+<div class="box" id="main"></div>
+
+</body>
+
+<script type="text/javascript">
+    var num = [];
+    //调用ajax来实现异步的加载
+    function getusers() {
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "Data/newData.action",
+            data: {},
+            dataType: "json",
+            success: function (result) {
+                if (result) {
+                    for (var i = 0; i < result.length; i++) {
+
+                        num.push(result[i].margin)
+                    }
+                }
+            }
+        });
+        return num;
+    }
+    // 执行异步请求
+    getusers();
+    var myChart = echarts.init(document.getElementById('main'));
+    //声明一个对象
+    option = {
+        title: {
+            text: "粮仓已用空间（%）",
+        },
+        series: [
+            {
+                type: 'gauge',
+                axisLine: {
+                    lineStyle: {
+                        width: 30,
+                        color: [
+                            [0.3, '#67e0e3'],
+                            [0.7, '#37a2da'],
+                            [1, '#fd666d']
+                        ]
+                    }
+                },
+                pointer: {
+                    itemStyle: {
+                        color: 'auto'
+                    }
+                },
+                axisTick: {
+                    distance: -30,
+                    length: 8,
+                    lineStyle: {
+                        color: '#fff',
+                        width: 2
+                    }
+                },
+                splitLine: {
+                    distance: -30,
+                    length: 30,
+                    lineStyle: {
+                        color: '#fff',
+                        width: 4
+                    }
+                },
+                axisLabel: {
+                    color: 'auto',
+                    distance: 40,
+                    fontSize: 20
+                },
+                detail: {
+                    valueAnimation: true,
+                    formatter: '{value} %',
+                    color: 'auto'
+                },
+                data: num
+            }
+        ]
+    };
+    myChart.setOption(option);
+
+
+
+</script>
+
+
+
+</html>

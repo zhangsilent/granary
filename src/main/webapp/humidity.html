@@ -1,0 +1,92 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时湿度</title>
+    <style>
+        .box {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 750px;
+            height: 500px;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <script src="echarts.min.js"></script>
+    <script src="JQuery.min.js"></script>
+</head>
+
+<body>
+
+<div class="box" id="main"></div>
+<script>
+
+    function create() {
+        // 初始化 图表对象
+        var mychart = echarts.init(document.getElementById("main"));
+        var H = [], time = [];
+        //调用ajax来实现异步的加载数据
+        function getusers() {
+            $.ajax({
+                type: "post",
+                async: false,
+                url: "Data/report.action",
+                data: {},
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        for (var i = 0; i < result.length; i++) {
+
+                            H.push(result[i].humiditys);
+                            time.push(result[i].times)
+                        }
+                    }
+                }
+            });
+            return H, time;
+        }
+        // 执行异步请求
+        getusers();
+        // 进行相关项的设置，也就是所谓的搭搭骨架，方便待会的ajax异步的数据填充
+        var option = {
+            title: {
+                text: '实时湿度'
+            },
+            tooltip: {
+                show: true
+            },
+            legend: {
+                data: ['湿度']
+            },
+            xAxis: [{
+                data: time
+            }],
+            yAxis: [{
+                type: 'value'
+            }],
+            series: [{
+                "name": "温度",
+                "type": "line",
+                "data": H
+            }]
+        };
+
+        mychart.setOption(option);
+    }
+    $(function (){
+        setInterval("create()",1000);
+    })
+
+</script>
+
+</script>
+</body>
+
+</html>

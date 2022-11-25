@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="175.178.52.224" id="1ac11f84-8293-42a0-b684-6e736e2d0875" port="22" customName="granary" nameFormat="CUSTOM" username="root">
+        <option name="customName" value="granary" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

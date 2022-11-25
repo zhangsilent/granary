@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="1522da2a-3995-4f27-9107-a2050ce9357d" name="granary" url="http://175.178.52.224:8080">
+        <fileTransfer rootFolder="/usr/tomcat/apache-tomcat-8.5.82/webapps" accessType="SFTP" host="175.178.52.224" port="22" sshConfigId="1ac11f84-8293-42a0-b684-6e736e2d0875" sshConfig="granary">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

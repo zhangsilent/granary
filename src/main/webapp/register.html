@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Sign in</title>
+	<style>
+		body {
+
+			background-repeat: no-repeat;
+			background-size: 100%;
+			background-position: 0px -50px;
+		}
+
+		#login-box {
+			background-color: #c7c7c7;
+			border-radius: 13px;
+			text-align: center;
+			margin: 0px auto;
+			margin-top: 80px;
+			width: 400px;
+			height: 500px;
+		}
+
+		#login-box h1 {
+			padding-top: 60px;
+			color: #ffffff;
+		}
+
+		#login-box .input-box {
+			margin-top: 30px;
+		}
+
+		#login-box .input-box input {
+			border: none;
+			background: none;
+			border-bottom: #FFFFFF 2px solid;
+			padding: 5px 10px;
+			outline: none;
+			color: #FFFFFF;
+		}
+
+		#login-box button {
+			line-height: 30px;
+			margin-top: 30px;
+			width: 130px;
+			height: 30px;
+			border-radius: 13px;
+			outline: none;
+			border: none;
+			background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+			color: #FFFFFF;
+		}
+
+		#login-box button:hover {
+			background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+		}
+
+		#login-box .input-box i {
+			color: #FFFFFF;
+		}
+	</style>
+	<script>
+		function keyLogin() {
+			if (event.keyCode == 13) {  //回车键的键值为13
+				$("#xxxx").click();  //xxxx为登录按钮的id
+			}
+		}
+	</script>
+</head>
+
+<body onkeydown="keyLogin() ;">
+
+	<div id="login-box">
+		<h1>可移动智能粮仓</h1>
+		<div class="input-box">
+			<i class="iconfont">&#xe609;</i>
+
+			<input type="text" placeholder="UserName" />
+		</div>
+		<div class="input-box">
+			<i class="iconfont">&#xe605;</i>
+			<input type="password" placeholder="UserPassword" />
+		</div>
+		<a href="index.html"><button id="#xxxx">Sign in</button></a>
+	</div>
+	<script>
+		var root = document.getElementById('root');
+		document.body.addEventListener('keyup', function (e) {
+			console.log(e)
+			if (e.keyCode == '13') {
+				window.location.href = "file:///C:/Users/asus/Desktop/%E5%8F%AF%E7%A7%BB%E5%8A%A8%E6%99%BA%E8%83%BD%E7%B2%AE%E4%BB%93/2022/5/2b64o12426/index.html";
+			}
+		});
+		$(function () {
+            $('#xxxx').on('click', function () {
+				$.ajax({
+					type: 'post',
+					url: '',
+					data: {text,password},
+					success: function(res) {
+						console.log(res)
+					}
+				})
+            })
+        })
+			
+	
+	</script>
+</body>
+
+</html>

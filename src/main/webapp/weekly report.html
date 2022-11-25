@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 750px;
+            margin: 0 auto;
+        }
+
+        @media screen and (max-width: 767px) {
+            .container {
+                width: 100%;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .container {
+                width: 750px;
+            }
+        }
+
+        @media screen and (min-width: 992px) {
+            .container {
+                width: 970px;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .container {
+                width: 1170px;
+            }
+
+        }
+
+        .box {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 750px;
+            height: 500px;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <script src="echarts.min.js"></script>
+    <script src="JQuery.min.js"></script>
+</head>
+
+<body>
+
+<div class="box" id="main">
+
+</div>
+<script>
+    function create() {
+        var app = {};
+        var myChart = echarts.init(document.getElementById("main"));
+        var H = [], T = [], O = [], C = [];
+        //调用ajax来实现异步的加载数据
+        function getusers() {
+            $.ajax({
+                type: "post",
+                async: false,
+                url: "Data/report.action",
+                data: {},
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        for (var i = 0; i < result.length; i++) {
+
+                            O.push(result[i].O2s),
+                                C.push(result[i].CO2s),
+                                H.push(result[i].humiditys),
+                                T.push(result[i].Tem)
+                        }
+                    }
+                }
+            });
+            return O, C, H, T;
+        }
+        // 执行异步请求
+        getusers();
+        var option;
+
+        const posList = [
+            'left',
+            'right',
+            'top',
+            'bottom',
+            'inside',
+            'insideTop',
+            'insideLeft',
+            'insideRight',
+            'insideBottom',
+            'insideTopLeft',
+            'insideTopRight',
+            'insideBottomLeft',
+            'insideBottomRight'
+        ];
+        app.configParameters = {
+            rotate: {
+                min: -90,
+                max: 90
+            },
+            align: {
+                options: {
+                    left: 'left',
+                    center: 'center',
+                    right: 'right'
+                }
+            },
+            verticalAlign: {
+                options: {
+                    top: 'top',
+                    middle: 'middle',
+                    bottom: 'bottom'
+                }
+            },
+            position: {
+                options: posList.reduce(function (map, pos) {
+                    map[pos] = pos;
+                    return map;
+                }, {})
+            },
+            distance: {
+                min: 0,
+                max: 100
+            }
+        };
+        app.config = {
+            rotate: 90,
+            align: 'left',
+            verticalAlign: 'middle',
+            position: 'insideBottom',
+            distance: 15,
+            onChange: function () {
+                const labelOption = {
+                    rotate: app.config.rotate,
+                    align: app.config.align,
+                    verticalAlign: app.config.verticalAlign,
+                    position: app.config.position,
+                    distance: app.config.distance
+                };
+                myChart.setOption({
+                    series: [
+                        {
+                            label: labelOption
+                        },
+                        {
+                            label: labelOption
+                        },
+                        {
+                            label: labelOption
+                        },
+                        {
+                            label: labelOption
+                        }
+                    ]
+                });
+            }
+        };
+        const labelOption = {
+            show: true,
+            position: app.config.position,
+            distance: app.config.distance,
+            align: app.config.align,
+            verticalAlign: app.config.verticalAlign,
+            rotate: app.config.rotate,
+            formatter: '{c}  {name|{a}}',
+            fontSize: 16,
+            rich: {
+                name: {}
+            }
+        };
+
+        option = {
+            title: {
+                text: '一周报告'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['氧气', '二氧化碳', '湿度', '温度']
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                left: 'right',
+                top: 'center',
+                feature: {
+                    mark: { show: true },
+                    dataView: { show: true, readOnly: false },
+                    magicType: { show: true, type: ['line', 'bar', 'stack'] },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    axisTick: { show: false },
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '氧气',
+                    type: 'bar',
+                    barGap: 0,
+                    label: labelOption,
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: O
+                },
+                {
+                    name: '二氧化碳',
+                    type: 'bar',
+                    label: labelOption,
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: C
+                },
+                {
+                    name: '湿度',
+                    type: 'bar',
+                    label: labelOption,
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: H
+                },
+                {
+                    name: '温度',
+                    type: 'bar',
+                    label: labelOption,
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: T
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    }
+
+    $(function (){
+        setInterval("create()",1000);
+    })
+</script>
+
+
+</body>
+
+</html>

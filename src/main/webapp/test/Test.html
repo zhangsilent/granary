@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html" charset="UTF-8">
+    <title>测试</title>
+    <script type="javascript" src="JQuery.min.js"></script>
+    <script type="javascript">
+    function getDatas() {
+            $.ajax({
+                type: "POST",
+                url: "",
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+<button value="取值" onclick="getDatas()"></button>
+</body>
+</html>

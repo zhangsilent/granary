@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .a{
+            width: 50px;
+            height: 40px;
+
+        }
+    </style>
+    <script src="JQuery.min.js"></script>
+</head>
+<body>
+<!-- 代码为最基础的加减操作， 其他限制条件（如数量上限）可在此基础上进行添加-->
+<button id="sub" class="a">-</button>
+<input type="text" value="1" id="num" class="a">
+<button id="add" class="a">+</button>
+<script>
+    var a;
+    let addNumber = document.getElementById('add');
+    let subNumber = document.getElementById('sub');
+    // 增加数量
+    addNumber.addEventListener('click',function(){
+        let num = Number(document.getElementById('num').value);
+        num++;
+        document.getElementById('num').value = num;
+        a = num;
+    })
+
+    // 减少数量
+    subNumber.addEventListener('click',function(){
+        let num = Number(document.getElementById('num').value);
+        num--;
+        if( num < 0 ){  // 最小值不能小于0
+            num = 0;
+        }
+        document.getElementById('num').value = num;
+         a = num;
+
+    })
+
+    $("#sub").click(function (){
+        $.ajax({
+            type : "post",
+            url : "Data/control_subT.action",
+            data: {a},
+            async: false,
+
+            success:function(data){
+
+                console.log(document.getElementById('num').value)
+            }
+
+        })
+    })
+    $("#add").click(function (){
+        $.ajax({
+            type : "post",
+            url : "Data/control_addT.action",
+            data: {a},
+            async: true,
+            success:function(data){
+                console.log(document.getElementById('num').value)
+            }
+
+        })
+    })
+</script>
+</body>
+</html>
